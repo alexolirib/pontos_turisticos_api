@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'ponto_turistico',
     'atracoes',
     'comentarios',
-    'avaliacoes'
+    'avaliacoes',
+    'enderecos'
 ]
 
 MIDDLEWARE = [
