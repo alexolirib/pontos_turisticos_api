@@ -1,6 +1,8 @@
 #view baseada em classe
+from rest_framework.authentication import TokenAuthentication
 from rest_framework.decorators import action
 from rest_framework.filters import SearchFilter
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
 
 from ponto_turistico.api.serializers import PontoTuristicoSerializer
@@ -10,7 +12,11 @@ from ponto_turistico.models import PontoTuristico
 class PontoTuristicoViewSet(ModelViewSet):
     # queryset = PontoTuristico.objects.all()
     serializer_class = PontoTuristicoSerializer
-
+    #obriga está autenticado
+    #DjangoModelPermissions --  ser baseada  as permissões do django admin
+    permission_classes = (IsAuthenticated,) # para usuários admin é IsAdminUser
+    # informa como o viewSet faz autenticação
+    authentication_classes = (TokenAuthentication,)
     #buscar ?search={}
     filter_backends = (SearchFilter,)
     #endereco__linha1 = é possível buscar os objetos que se relaciona com o endereço pela a linha1

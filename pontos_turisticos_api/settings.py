@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    # rodar migrate
+    'rest_framework.authtoken',
     'django_filters',
     'ponto_turistico',
     'atracoes',
