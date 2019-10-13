@@ -1,5 +1,6 @@
 #view baseada em classe
 from rest_framework.decorators import action
+from rest_framework.filters import SearchFilter
 from rest_framework.viewsets import ModelViewSet
 
 from ponto_turistico.api.serializers import PontoTuristicoSerializer
@@ -10,8 +11,34 @@ class PontoTuristicoViewSet(ModelViewSet):
     # queryset = PontoTuristico.objects.all()
     serializer_class = PontoTuristicoSerializer
 
+    #buscar ?search={}
+    filter_backends = (SearchFilter,)
+    #endereco__linha1 = é possível buscar os objetos que se relaciona com o endereço pela a linha1
+    search_fields = ('nome', 'descricao', 'endereco__linha1')
+
+    #tem que ser campo único /1, poderia mudar 
+    lookup_field = 'id'
+
     def get_queryset(self):
-        return PontoTuristico.objects.filter(aprovado=True)
+        # queryString /?id=1&nome=alexandre&descricao=hoje
+        #se não passar o parametro irá padrão None
+        id =self.request.query_params.get('id', None)
+        nome =self.request.query_params.get('nome', None)
+        descricao =self.request.query_params.get('descricao', None)
+        #como é lazy load só irá buscar no final os objetos no banco
+        #estou "pegando tudo e depois vou filtrando
+        queryset = PontoTuristico.objects.all()
+
+        if id:
+            queryset = PontoTuristico.objects.filter(pk=id)
+
+        if nome:
+            #__iexact não importa o maiusculo ou o minusculo
+            queryset = queryset.filter(nome__iexact=nome)
+
+        if descricao:
+            queryset = queryset.filter(descricao__iexact=descricao)
+        return queryset
 
     #actions padrões
     #get geral /

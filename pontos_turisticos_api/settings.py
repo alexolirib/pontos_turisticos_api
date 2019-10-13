@@ -28,7 +28,10 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
-# Application definition
+# dessa forma irá ativar o django filter em todos os models se não quiser (ver exemplo no app atrações viewset)
+# REST_FRAMEWORK = {
+#     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+# }
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -38,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'django_filters',
     'ponto_turistico',
     'atracoes',
     'comentarios',
