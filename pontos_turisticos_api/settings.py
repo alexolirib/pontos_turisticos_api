@@ -20,7 +20,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ['alexolirib-pontos-turisticos.herokuapp.com', 'localhost:8000']
+# ALLOWED_HOSTS = ['alexolirib-pontos-turisticos.herokuapp.com', 'localhost:8000']
+ALLOWED_HOSTS = ['*']
 
 # dessa forma irá ativar o django filter em todos os models se não quiser (ver exemplo no app atrações viewset)
 # REST_FRAMEWORK = {
