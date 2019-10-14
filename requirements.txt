@@ -1,4 +1,12 @@
 django
 djangorestframework
+#para imagem
 pillow
 django-filter
+#dependencias para o heroku
+python-decouple
+dj-database-url
+#para arquivo staticos do projeto (configura no arquivo WSGI)
+dj-static
+gunicorn
+psycopg2
