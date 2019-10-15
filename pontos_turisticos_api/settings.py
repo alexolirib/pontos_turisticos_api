@@ -87,6 +87,7 @@ WSGI_APPLICATION = 'pontos_turisticos_api.wsgi.application'
 # }
 from dj_database_url import parse as dburl
 default_dburl = 'sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3')
+# -> heroku run python3 manage.py migrate
 DATABASES = {
     #DATABASE_URL - no heroku tem uma variável de ambiente que se chema "DATABASE_URL"
     #config config busca no arquivo .env do projeto se não tiver busca na vriável de ambiente do SO
