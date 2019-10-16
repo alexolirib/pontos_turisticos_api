@@ -137,3 +137,10 @@ MEDIA_URL = '/media/'
 
 #para arquivo statics (html)
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+
+REST_FRAMEWORK = {
+    # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 5
+}
