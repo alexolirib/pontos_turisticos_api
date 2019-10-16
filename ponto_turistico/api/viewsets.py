@@ -1,4 +1,5 @@
 #view baseada em classe
+from django.http import HttpResponse
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.decorators import action
 from rest_framework.filters import SearchFilter
@@ -22,7 +23,7 @@ class PontoTuristicoViewSet(ModelViewSet):
     #endereco__linha1 = é possível buscar os objetos que se relaciona com o endereço pela a linha1
     search_fields = ('nome', 'descricao', 'endereco__linha1')
 
-    #tem que ser campo único /1, poderia mudar 
+    #tem que ser campo único /1, poderia mudar (entao minha actions será com o id)
     lookup_field = 'id'
 
     def get_queryset(self):
@@ -82,3 +83,14 @@ class PontoTuristicoViewSet(ModelViewSet):
     @action(methods=['get'], detail=False)
     def teste(self, request, pk=None):
         pass
+
+    @action(methods=['post'], detail=True)
+    def associa_atracoes(self, request, id):
+        atracoes = request.data['ids']
+
+        ponto = PontoTuristico.objects.get(id=id)
+        #fazer várias associaçẽos
+        ponto.atracoes.set(atracoes)
+        ponto.save()
+
+        return HttpResponse('OK')
